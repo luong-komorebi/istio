@@ -51,17 +51,9 @@ def main(args):
     }
     if args.iss:
         payload["iss"] = args.iss
-    if args.sub:
-        payload["sub"] = args.sub
-    else:
-        payload["sub"] = args.iss
-
+    payload["sub"] = args.sub if args.sub else args.iss
     if args.aud:
-        if "," in args.aud:
-            payload["aud"] = args.aud.split(",")
-        else:
-            payload["aud"] = args.aud
-
+        payload["aud"] = args.aud.split(",") if "," in args.aud else args.aud
     if args.claims:
         for item in args.claims.split(","):
             k, v = item.split(':')

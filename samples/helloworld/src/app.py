@@ -26,7 +26,7 @@ def hello():
 
     # do some cpu intensive computation
     x = 0.0001
-    for i in range(0, 1000000):
+    for _ in range(0, 1000000):
         x = x + math.sqrt(x)
 
     return 'Hello version: %s, instance: %s\n' % (version, os.environ.get('HOSTNAME'))

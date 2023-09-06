@@ -30,9 +30,7 @@ def by_resource_name(res):
     if res is None:
         return ""
 
-    return "{}::{}::{}".format(res['apiVersion'],
-                               res['kind'],
-                               res['metadata']['name'])
+    return f"{res['apiVersion']}::{res['kind']}::{res['metadata']['name']}"
 
 
 def keydiff(k0, k1):
@@ -123,11 +121,7 @@ def compare(args):
 
     added, removed, common = keydiff(q0.keys(), q1.keys())
 
-    changed = 0
-    for k in sorted(common):
-        if q0[k] != q1[k]:
-            changed += 1
-
+    changed = sum(1 for k in sorted(common) if q0[k] != q1[k])
     print("## +++ ", args.new)
     print("## --- ", args.orig)
     print("## Added:", len(added))
